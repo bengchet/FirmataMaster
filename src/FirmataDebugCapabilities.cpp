@@ -87,6 +87,9 @@ static String mode2string(int mode) {
 	case PULLUP:
 		return ("PullUp");
 		break;
+	case TONE:
+		return ("Tone");
+		break;
 	default:
 		return ("Mode not implemented");
 	}

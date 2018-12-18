@@ -41,16 +41,17 @@
 #define INPUT	0 //Constant to set a pin to input mode (in a call to pinMode())
 #define OUTPUT	1 //Constant to set a pin to output mode (in a call to pinMode())
 #define ANALOG	2 //Constant to set a pin to analog mode (in a call to pinMode())
-#define PWM		3 //Constant to set a pin to PWM mode (in a call to pinMode())
+#define PWM	3 //Constant to set a pin to PWM mode (in a call to pinMode())
 #define SERVO	4 //Constant to set a pin to servo mode (in a call to pinMode())
 #define SHIFT	5 //Constant to set a pin to shiftIn/shiftOut mode (in a call to pinMode())
-#define I2C		6 //Constant to set a pin to I2C mode (in a call to pinMode())
+#define I2C	6 //Constant to set a pin to I2C mode (in a call to pinMode())
 #define ONEWIRE 7 //Constant to set a pin to OneWire mode (in a call to pinMode())
 #define STEPPER 8 //Constant to set a pin to Stepper Motor mode (in a call to pinMode())
 #define ENCODER 9 //Constant to set a pin to Rotary Encoder mode (in a call to pinMode())
 #define SERIAL	10 //Constant to set a pin to Serial mode (in a call to pinMode())
 #define PULLUP	11 //Constant to set a pin to pullup output mode (in a call to pinMode())
-#define NUMBER_OF_MODES 12 //Number of defined modes to reserve memory in capability arrays.
+#define TONE	12 //Constant to set a pin to tone mode (in a call to pinMode())
+#define NUMBER_OF_MODES 13 //Number of defined modes to reserve memory in capability arrays.
 
 //Digital mode states
 #define HIGH	1 // Constant to write a high value to a pin (in a call to digitalWrite())
@@ -76,7 +77,7 @@
 // extended command set using sysex (0-127/0x00-0x7F)
 /* 0x00-0x0F reserved for user-defined commands */
 #define RESERVED_COMMAND		0x00 // 2nd SysEx data byte is a chip-specific command (AVR, PIC, TI, etc)
-#define TONE_DATA				0x5F // Call Arduino tone() and notone()
+#define TONE_DATA			0x5F // Call Arduino tone() and notone()
 #define SERIAL_MESSAGE			0x60 // communicate with serial devices, including other boards
 #define ENCODER_DATA			0x61 // Incremental encoder data
 #define ANALOG_MAPPING_QUERY	0x69 // ask for mapping of analog to pin numbers
@@ -99,6 +100,10 @@
 #define SCHEDULER_COMMAND		0x7B // configures schedules of commands
 #define SYSEX_NON_REALTIME		0x7E // MIDI Reserved for non-realtime messages
 #define SYSEX_REALTIME			0x7F // MIDI Reserved for realtime messages
+
+// Tone
+#define TONE_PLAY		    0x00
+#define TONE_STOP		    0x01
 
 // Serial port Ids
 #define HW_SERIAL0                  0x00
@@ -373,6 +378,22 @@ class FirmataClientClass
   void serialListen(int portId);
 
 #endif // FIRMATA_SERIAL_SUPPORT
+
+ 	/**
+	* Tone
+	*
+	* @param[in] pin.
+	* @param[in] frequency.
+	* @param[in] duration.
+	*/
+	void tone(uint8_t pin, int frequency, int duration);
+
+	/**
+	* noTone
+	*
+	* @param[in] pin.
+	*/
+	void noTone(uint8_t pin);
 
 	/**
 	* Configure analog and i2c data sampling interval

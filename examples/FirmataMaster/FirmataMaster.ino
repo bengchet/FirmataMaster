@@ -28,7 +28,6 @@ void setup()
 	Serial1.println();
 	//sserial.begin(57600);
 	//sserial.flush();
-		
 	
 	delay(2000);
 

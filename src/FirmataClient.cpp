@@ -22,13 +22,13 @@ void FirmataClientClass::begin(Stream &stream)
 	firmataStream = &stream;
 
 	// Chech stram for data every 50 miliseconds
-	tk.attach_ms(20, checkStream, this);
+	tk.attach_ms(10, checkStream, this);
 
 	reset(); // Send reset to firmata board
-	delay(1000);
+	delay(100);
 	queryProtocol();
 	queryFirmware(); // TODO: Check firmware to ensure a Firmata Board is connected
-	delay(3000); // Wait for response
+	delay(500); // Wait for response
 
 
 #ifdef FIRMATA_DIGITAL_INPUT_SUPPORT
@@ -40,14 +40,14 @@ void FirmataClientClass::begin(Stream &stream)
 	}
 #endif // FIRMATA_DIGITAL_INPUT_SUPPORT
 
-	delay(500);
+	delay(50);
 
 	queryCapabilities(); //Query Firmata capabilities
 
-	delay(1000);
+	delay(100);
 #if defined(DO_REPORT_ANALOG) && defined(FIRMATA_ANALOG_INPUT_SUPPORT)
 	queryAnalogMapping(); // Query analog inputs mapping
-	delay(1000);
+	delay(100);
 
 	// Enable analog reporting
 	for (int i = 0; i < MAX_ANALOG_PINS; i++) {
